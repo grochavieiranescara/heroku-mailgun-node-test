@@ -7,16 +7,16 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-let emailTemplate = "";
+// let emailTemplate = "";
 
-fs.readFile(
-  __dirname + "/resources/email-example.html",
-  "utf8",
-  function (err, data) {
-    if (err) throw err;
-    emailTemplate = data;
-  }
-);
+// fs.readFile(
+//   __dirname + "/resources/email-example.html",
+//   "utf8",
+//   function (err, data) {
+//     if (err) throw err;
+//     emailTemplate = data;
+//   }
+// );
 
 const mailgun = () =>
   mg({
@@ -44,7 +44,7 @@ app.post("/api/email", (req, res) => {
         from: "HerokuAppMail <herokuappmail@mg.yourdomain.com>",
         to: `${email}`,
         subject: `${subject}`,
-        html: emailTemplate.replace("{{name}}", message),
+        html: `<p>${message}</p>`,
       },
       (error, body) => {
         if (error) {
